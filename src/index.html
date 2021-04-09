@@ -4,6 +4,13 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css"
+		/>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+		<script src="/assets/js/jqmeter.min.js"></script>
 		<link rel="stylesheet" href="/assets/css/style.css" />
 	</head>
 
@@ -11,4 +18,20 @@
 		@@include('include/_svg.html') @@include('include/_sidebar.html')
 		@@include('include/_index.html')
 	</body>
+	<script>
+		function clock() {
+			var date = new Date(),
+				hours =
+					date.getHours() < 10
+						? "0" + date.getHours()
+						: date.getHours(),
+				minutes =
+					date.getMinutes() < 10
+						? "0" + date.getMinutes()
+						: date.getMinutes();
+			document.getElementById("clock").innerHTML = hours + ":" + minutes;
+		}
+		setInterval(clock, 1000);
+		clock();
+	</script>
 </html>

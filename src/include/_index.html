@@ -1,0 +1,120 @@
+<main>
+	@@include('_topbar.html')
+	<div class="container">
+		<h2>Welcome, Annie!</h2>
+		<div class="box">
+			<div class="box__card">
+				<div class="box__card--title">Time</div>
+				<div id="clock" class="box__card--content"></div>
+			</div>
+			<div class="box__card">
+				<div class="box__card--title">Outdoor Temperature</div>
+				<div class="box__card--temp">
+					+21.3°C
+					<svg>
+						<use xlink:href="#weather" />
+					</svg>
+				</div>
+			</div>
+			<div class="box__card">
+				<div class="box__card--title">Members at home:</div>
+				<div class="box--wrap">
+					<div class="box__card--type">
+						<svg class="iconcolor1">
+							<use xlink:href="#humanicon" />
+						</svg>
+						<span class="box__card--title">Annie</span>
+					</div>
+					<div class="box__card--type">
+						<svg class="iconcolor2">
+							<use xlink:href="#humanicon" />
+						</svg>
+						<span class="box__card--title">John</span>
+					</div>
+					<a href="#" class="box__card--type">
+						<svg class="iconcolor4">
+							<use xlink:href="#jukovsvg" />
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="controls">
+			<h3>Controls:</h3>
+			<div class="controls__panel">
+				<div class="controls__panel__light">
+					<h4 class="controls__panel__light--text">
+						Light Intensity
+					</h4>
+					<div id="handle1" class="round-slider blue"></div>
+				</div>
+				<div class="controls__panel__air">
+					<h4 class="controls__panel__light--text">
+						Air Conditioning
+					</h4>
+					<div id="handle2" class="round-slider gray"></div>
+				</div>
+				<div class="controls__panel--pbar">
+					<input
+						class="range-bar"
+						type="range"
+						min="19"
+						max="32"
+						value="22"
+						step="1"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<script
+	src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
+<script>
+	let optionRoundSlider = {
+		radius: 85,
+		sliderType: "min-range",
+		value: 40,
+		radius: 130,
+		circleShape: "half-top",
+	};
+	function changeTooltip(e) {
+		var val = e.value,
+			speed;
+
+		return val;
+	}
+
+	$("#handle1").roundSlider(optionRoundSlider);
+	$("#handle2").roundSlider(optionRoundSlider);
+
+	function loadVal() {
+		var showVal = $(".range-bar").val();
+		$(".range-bar").attr("data-val", showVal);
+	}
+
+	window.addEventListener("load", loadVal);
+
+	$('input[type="range"]').change(function () {
+		var val =
+			($(this).val() - $(this).attr("min")) /
+			($(this).attr("max") - $(this).attr("min"));
+
+		$(this).css(
+			"background-image",
+			"-webkit-gradient(linear, left top, right top, " +
+				"color-stop(" +
+				val +
+				", #EE777F), " +
+				"color-stop(" +
+				val +
+				", #fff)" +
+				")"
+		);
+		loadVal();
+	});
+</script>

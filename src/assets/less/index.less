@@ -1,0 +1,179 @@
+.container {
+    padding: 10px;
+    max-width: 1000px;
+    width: 100%;
+    margin: 15px 0 0 55px;
+}
+
+
+h2 {
+    font-size: 48px;
+    color: @blacktext;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    margin: 25px 0;
+
+    &__card {
+        border: 1px solid @white;
+        box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.14);
+        border-radius: 30px;
+        height: 144px;
+        padding: 13px 27px;
+        margin-right: 25px;
+
+        &--title {
+            color: @graytext;
+            font-size: 15px;
+            font-family: @FFRRegular;
+            line-height: 18px;
+            letter-spacing: 0.09em;
+            margin-bottom: 15px;
+
+        }
+
+        &--content {
+            color: @graybox;
+            font-size: 51px;
+            font-family: @FFRBold;
+        }
+
+        &--temp {
+            color: @graybox;
+            font-size: 40px;
+            font-family: @FFRBold;
+            display: flex;
+            flex-direction: row;
+
+
+            svg {
+                width: 68px;
+                height: 65px;
+                fill: @graybox;
+                margin-left: 15px;
+            }
+        }
+
+        &--type {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            margin-right: 20px;
+
+            svg {
+                width: 46px;
+                height: 46px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    &--wrap {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.controls {
+    &__panel {
+        display: flex;
+        flex-direction: row;
+
+        &--pbar {
+            display: inline-block;
+            width: 50px;
+            height: 150px;
+            padding: 0;
+
+            input[type="range"] {
+                -webkit-appearance: none;
+                -moz-apperance: none;
+                border-radius: 6px;
+                height: 50px;
+                background-image: -webkit-gradient(linear,
+                        left top,
+                        right top,
+                        color-stop(0.15, #EE777F),
+                        color-stop(0.15, #fff));
+            }
+
+            input[type='range']::-webkit-slider-thumb {
+                -webkit-appearance: none !important;
+                background-color: transparent;
+                // border: 1px solid #EE777F;
+                height: 0px;
+                width: 0px;
+            }
+
+            .range-bar {
+                width: 85px;
+                height: 239px;
+                margin: 0;
+                transform-origin: 75px 75px;
+                transform: rotate(-90deg);
+                position: relative;
+
+                &::after {
+                    content: "+"attr(data-val) "°C";
+                    position: absolute;
+                    transform: rotate(90deg);
+                    right: 0;
+                    left: 0;
+                    top: 0;
+                    bottom: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                }
+            }
+        }
+    }
+}
+
+.round-slider {
+    * {
+        border: none;
+        box-shadow: none;
+    }
+
+    .rs-path.rs-range-color {
+        background: linear-gradient(120deg, transparent, rgba(101, 189, 192, 1)) !important;
+        opacity: 1 !important;
+
+    }
+
+    .rs-handle {
+        background: rgba(101, 189, 192, 1);
+    }
+
+    .rs-path-color {
+        background-color: @white;
+    }
+
+    &.blue {
+
+        .rs-path.rs-range-color {
+            background: linear-gradient(120deg, transparent, rgba(101, 189, 192, 1)) !important;
+
+        }
+
+        .rs-handle {
+            background: rgba(101, 189, 192, 1);
+        }
+    }
+
+    &.gray {
+
+        .rs-path.rs-range-color {
+            background: linear-gradient(120deg, transparent, rgba(29, 35, 67, 1)) !important;
+
+        }
+
+        .rs-handle {
+            background: rgba(29, 35, 67, 1);
+        }
+    }
+}
