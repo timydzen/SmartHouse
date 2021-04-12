@@ -2,7 +2,7 @@
 	@@include('_topbar.html')
 	<div class="container">
 		<h2>Welcome, Annie!</h2>
-		<div class="box">
+		<div class="box info">
 			<div class="box__card">
 				<div class="box__card--title">Time</div>
 				<div id="clock" class="box__card--content"></div>
@@ -42,19 +42,16 @@
 		<div class="controls">
 			<h3>Controls:</h3>
 			<div class="controls__panel">
-				<div class="controls__panel__light">
-					<h4 class="controls__panel__light--text">
-						Light Intensity
-					</h4>
+				<div class="controls__panel--sensor box__card">
+					<h4 class="title">Light Intensity:</h4>
 					<div id="handle1" class="round-slider blue"></div>
 				</div>
-				<div class="controls__panel__air">
-					<h4 class="controls__panel__light--text">
-						Air Conditioning
-					</h4>
+				<div class="controls__panel--sensor box__card">
+					<h4 class="title">Air Conditioning:</h4>
 					<div id="handle2" class="round-slider gray"></div>
 				</div>
-				<div class="controls__panel--pbar">
+				<div class="controls__panel--sensor box__card">
+					<h4 class="title">Temperature:</h4>
 					<input
 						class="range-bar"
 						type="range"
@@ -63,6 +60,36 @@
 						value="22"
 						step="1"
 					/>
+				</div>
+
+				<div class="switch--col">
+					<label class="switch">
+						<input type="checkbox" hidden />
+						<div class="switch--box red">
+							<svg>
+								<use xlink:href="#wifi" />
+							</svg>
+							<span>Wi-fi</span>
+						</div>
+					</label>
+					<label class="switch">
+						<input type="checkbox" hidden />
+						<div class="switch--box green">
+							<svg>
+								<use xlink:href="#music" />
+							</svg>
+							<span>Music</span>
+						</div>
+					</label>
+					<label class="switch">
+						<input type="checkbox" hidden />
+						<div class="switch--box blue">
+							<svg>
+								<use xlink:href="#intercom" />
+							</svg>
+							<span>Intercom</span>
+						</div>
+					</label>
 				</div>
 			</div>
 		</div>
@@ -98,23 +125,16 @@
 	}
 
 	window.addEventListener("load", loadVal);
+	let inp = document.querySelector(".range-bar");
 
-	$('input[type="range"]').change(function () {
-		var val =
-			($(this).val() - $(this).attr("min")) /
-			($(this).attr("max") - $(this).attr("min"));
+	inp.addEventListener("input", function (e) {
+		inpVal = e.target.value;
+		console.log();
+		let val =
+			(inpVal - e.target.getAttribute("min")) /
+			(e.target.getAttribute("max") - e.target.getAttribute("min"));
 
-		$(this).css(
-			"background-image",
-			"-webkit-gradient(linear, left top, right top, " +
-				"color-stop(" +
-				val +
-				", #EE777F), " +
-				"color-stop(" +
-				val +
-				", #fff)" +
-				")"
-		);
+		inp.style.cssText = `background-image: -webkit-gradient(linear, left top, right top, color-stop( ${val} , #EE777F), color-stop(${val}, #fff))`;
 		loadVal();
 	});
 </script>

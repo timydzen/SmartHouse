@@ -1,14 +1,18 @@
 .container {
-    padding: 10px;
-    max-width: 1000px;
+    // max-width: 1000px;
     width: 100%;
-    margin: 15px 0 0 55px;
+    padding: 15px 55px;
 }
 
 
 h2 {
     font-size: 48px;
     color: @blacktext;
+    margin-bottom: 25px;
+}
+
+h3 {
+    margin-bottom: 35px;
 }
 
 .box {
@@ -16,13 +20,19 @@ h2 {
     flex-direction: row;
     margin: 25px 0;
 
+    &.info {
+        .box__card {
+            height: 144px;
+            padding: 13px 27px;
+            margin-right: 25px;
+        }
+    }
+
     &__card {
         border: 1px solid @white;
         box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.14);
         border-radius: 30px;
-        height: 144px;
-        padding: 13px 27px;
-        margin-right: 25px;
+
 
         &--title {
             color: @graytext;
@@ -81,42 +91,38 @@ h2 {
         display: flex;
         flex-direction: row;
 
-        &--pbar {
-            display: inline-block;
-            width: 50px;
-            height: 150px;
-            padding: 0;
+        &--sensor {
+            padding: 15px 28px 35px;
+            margin-right: 25px;
 
-            input[type="range"] {
+            .round-slider {
+                margin: 34px auto;
+            }
+
+
+
+            .range-bar {
+                width: 200px;
+                height: 65px;
+                margin: 70px auto;
+                outline: none;
+                transform: rotate(-90deg);
+                position: relative;
                 -webkit-appearance: none;
                 -moz-apperance: none;
-                border-radius: 6px;
-                height: 50px;
+                border-radius: 25px;
+
                 background-image: -webkit-gradient(linear,
                         left top,
                         right top,
-                        color-stop(0.15, #EE777F),
-                        color-stop(0.15, #fff));
-            }
+                        color-stop(0.15, @coralicon),
+                        color-stop(0.15, @white));
+                box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.14);
 
-            input[type='range']::-webkit-slider-thumb {
-                -webkit-appearance: none !important;
-                background-color: transparent;
-                // border: 1px solid #EE777F;
-                height: 0px;
-                width: 0px;
-            }
 
-            .range-bar {
-                width: 85px;
-                height: 239px;
-                margin: 0;
-                transform-origin: 75px 75px;
-                transform: rotate(-90deg);
-                position: relative;
 
                 &::after {
-                    content: "+"attr(data-val) "°C";
+                    content: "+"attr(data-val) "\2103";
                     position: absolute;
                     transform: rotate(90deg);
                     right: 0;
@@ -126,54 +132,162 @@ h2 {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    font-size: 20px;
+                    font-family: @FFRRegular;
+                    margin-right: 60px;
 
+                }
+
+                &::before {
+                    content: '';
+                    background-image: url(/assets/img/main/tempsensor.svg);
+                    width: 22px;
+                    height: 40px;
+                    position: absolute;
+                    transform: rotate(90deg);
+                    top: calc(50% - 40px / 2);
+                    right: 40px;
+                    mix-blend-mode: multiply;
+                    background-size: contain;
+                }
+
+                &::-webkit-slider-thumb {
+                    -webkit-appearance: none !important;
+                    background-color: red;
+                    width: 5px;
+                }
+            }
+
+
+            .round-slider {
+                * {
+                    border: none;
+                    box-shadow: none;
+                }
+
+                .rs-path.rs-range-color {
+                    background: linear-gradient(120deg, transparent, rgba(101, 189, 192, 1)) !important;
+                    opacity: 1 !important;
+
+                }
+
+                .rs-handle {
+                    background: rgba(101, 189, 192, 1);
+                }
+
+                .rs-path-color {
+                    background-color: @white;
+                }
+
+                &.blue {
+
+                    .rs-path.rs-range-color {
+                        background: linear-gradient(120deg, transparent, rgba(101, 189, 192, 1)) !important;
+
+                    }
+
+                    .rs-handle {
+                        background: rgba(101, 189, 192, 1);
+                    }
+                }
+
+                &.gray {
+
+                    .rs-path.rs-range-color {
+                        background: linear-gradient(120deg, transparent, rgba(29, 35, 67, 1)) !important;
+
+                    }
+
+                    .rs-handle {
+                        background: rgba(29, 35, 67, 1);
+                    }
+                }
+            }
+
+        }
+
+        &--pbar {
+            display: inline-block;
+            width: 50px;
+            height: 150px;
+            padding: 0;
+
+
+        }
+    }
+
+    .switch {
+        width: 100%;
+        height: 34px;
+        cursor: pointer;
+        margin-bottom: 60px;
+
+        &--col {
+            display: flex;
+            flex-direction: column;
+            max-width: 140px;
+            width: 100%;
+        }
+
+        input {
+            &:checked {
+                +.switch--box {
+                    &.red {
+                        background: @coralicon;
+                    }
+
+                    &.blue {
+                        background: @blueicon;
+                    }
+
+                    &.green {
+                        background: @greenicon;
+                    }
+
+                    color: @white;
+
+                    svg {
+                        fill: @white;
+                    }
+                }
+
+                &:focus {
+                    +.switch--box {
+                        box-shadow: 0 0 1px #2196F3;
+                    }
                 }
             }
         }
-    }
-}
 
-.round-slider {
-    * {
-        border: none;
-        box-shadow: none;
-    }
+        &--box {
+            border-radius: 18px;
+            display: flex;
+            flex-direction: row;
+            color: @black;
+            align-items: center;
+            padding: 25px 20px;
+            transition: .3s;
+            font-size: 15px;
+            font-family: @FFRRegular;
 
-    .rs-path.rs-range-color {
-        background: linear-gradient(120deg, transparent, rgba(101, 189, 192, 1)) !important;
-        opacity: 1 !important;
+            svg {
+                max-width: 32px;
+                max-height: 23px;
+                fill: @black;
+                margin-right: 10px;
+                transition: .3s;
+            }
 
-    }
+            &.red,
+            &.blue,
+            &.green {
+                background: @graytext;
+            }
 
-    .rs-handle {
-        background: rgba(101, 189, 192, 1);
-    }
 
-    .rs-path-color {
-        background-color: @white;
-    }
-
-    &.blue {
-
-        .rs-path.rs-range-color {
-            background: linear-gradient(120deg, transparent, rgba(101, 189, 192, 1)) !important;
-
-        }
-
-        .rs-handle {
-            background: rgba(101, 189, 192, 1);
-        }
-    }
-
-    &.gray {
-
-        .rs-path.rs-range-color {
-            background: linear-gradient(120deg, transparent, rgba(29, 35, 67, 1)) !important;
-
-        }
-
-        .rs-handle {
-            background: rgba(29, 35, 67, 1);
+            &:hover {
+                box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.14);
+            }
         }
     }
 }
