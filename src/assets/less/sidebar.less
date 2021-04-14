@@ -41,12 +41,6 @@
             font-size: 15px;
             color: rgba(255, 245, 245, 0.65);
 
-            a {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
-
             .icon {
                 height: 35px;
                 width: 35px;
@@ -54,6 +48,23 @@
                 opacity: 0.6;
                 margin: 0 auto 16px;
             }
+
+            a {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                &:hover,
+                &focus {
+                    color: @white;
+
+                    .icon {
+                        opacity: 1;
+                    }
+
+                }
+            }
+
         }
     }
 }

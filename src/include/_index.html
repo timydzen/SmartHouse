@@ -44,16 +44,28 @@
 			<div class="controls__panel">
 				<div class="controls__panel--sensor box__card">
 					<h4 class="title">Light Intensity:</h4>
-					<div id="handle1" class="round-slider blue"></div>
+					<div class="round-slider--inner">
+						<div id="handle1" class="round-slider blue"></div>
+					</div>
+					<div class="shkala">
+						<span>0</span>
+						<span>100</span>
+					</div>
 				</div>
 				<div class="controls__panel--sensor box__card">
 					<h4 class="title">Air Conditioning:</h4>
-					<div id="handle2" class="round-slider gray"></div>
+					<div class="round-slider--inner">
+						<div id="handle2" class="round-slider gray"></div>
+					</div>
+					<div class="shkala">
+						<span>0</span>
+						<span>100</span>
+					</div>
 				</div>
 				<div class="controls__panel--sensor box__card">
 					<h4 class="title">Temperature:</h4>
 					<input
-						class="range-bar"
+						class="range-bar temp"
 						type="range"
 						min="19"
 						max="32"
@@ -102,13 +114,29 @@
 ></script>
 <script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
 <script>
-	let optionRoundSlider = {
-		radius: 85,
+	let optionRoundSliderGray = {
+		radius: 90,
 		sliderType: "min-range",
 		value: 40,
-		radius: 130,
-		circleShape: "half-top",
+		startAngle: 315,
+		circleShape: "pie",
+		rangeColor: "#565A72",
+		pathColor: "#565A72",
+		mouseScrollAction: true,
 	};
+
+	let optionRoundSliderBlue = {
+		radius: 90,
+		sliderType: "min-range",
+		value: 40,
+		startAngle: 315,
+		circleShape: "pie",
+		rangeColor: "#65bdc0",
+		pathColor: "#65bdc0",
+		tooltipColor: "#65bdc0",
+		mouseScrollAction: true,
+	};
+
 	function changeTooltip(e) {
 		var val = e.value,
 			speed;
@@ -116,25 +144,34 @@
 		return val;
 	}
 
-	$("#handle1").roundSlider(optionRoundSlider);
-	$("#handle2").roundSlider(optionRoundSlider);
+	$("#handle1").roundSlider(optionRoundSliderBlue);
+	$("#handle2").roundSlider(optionRoundSliderGray);
 
-	function loadVal() {
-		var showVal = $(".range-bar").val();
-		$(".range-bar").attr("data-val", showVal);
+	function rangeBar(el, color) {
+		let inp = document.querySelector(el);
+		let showVal = $(el).val();
+
+		$(el).attr("data-val", showVal);
+
+		inp.addEventListener("input", function (e) {
+			inpVal = e.target.value;
+
+			let val =
+				(inpVal - e.target.getAttribute("min")) /
+				(e.target.getAttribute("max") - e.target.getAttribute("min"));
+
+			inp.style.cssText = `background-image: -webkit-gradient(linear, left top, right top, color-stop( ${val} , ${color}), color-stop(${val}, #fff))`;
+
+			showVal = $(el).val();
+			$(el).attr("data-val", showVal);
+		});
 	}
 
-	window.addEventListener("load", loadVal);
-	let inp = document.querySelector(".range-bar");
+	function loadRangeBars() {
+		rangeBar(".temp", "#EE777F");
+	}
 
-	inp.addEventListener("input", function (e) {
-		inpVal = e.target.value;
-		console.log();
-		let val =
-			(inpVal - e.target.getAttribute("min")) /
-			(e.target.getAttribute("max") - e.target.getAttribute("min"));
-
-		inp.style.cssText = `background-image: -webkit-gradient(linear, left top, right top, color-stop( ${val} , #EE777F), color-stop(${val}, #fff))`;
-		loadVal();
+	window.addEventListener("load", function () {
+		loadRangeBars();
 	});
 </script>

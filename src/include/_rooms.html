@@ -1,0 +1,102 @@
+<main>
+	@@include('_topbar.html')
+	<div class="container">
+		<div class="room">
+			<h2>Kitchen</h2>
+			<div class="room__info">
+				<div class="cards">
+					<div class="cards-info">
+						<h5>Room’s Temperature</h5>
+						<div class="temp-val val-sens"></div>
+						<div class="temp-val-f val-sens"></div>
+					</div>
+					<input
+						class="cards-bar temp"
+						type="range"
+						min="19"
+						max="32"
+						value="22"
+						step="1"
+						name="temp"
+					/>
+				</div>
+				<div class="cards">
+					<div class="cards-info">
+						<h5>Room’s Humidity</h5>
+						<div class="water-val val-sens"></div>
+					</div>
+					<input
+						class="cards-bar water"
+						type="range"
+						min="0"
+						max="100"
+						value="22"
+						step="1"
+						name="water"
+					/>
+				</div>
+				<div class="cards">
+					<div class="cards-info">
+						<h5>Room’s Lightning</h5>
+						<div class="light-val val-sens"></div>
+					</div>
+					<input
+						class="cards-bar light"
+						type="range"
+						min="0"
+						max="100"
+						value="22"
+						step="1"
+						name="light"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<script
+	src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"
+></script>
+<script>
+	function rangeBar(el, color, colorStop) {
+		let inp = document.querySelector(el);
+		let showVal = $(el).val();
+
+		$(el).attr("data-val", showVal);
+		$(`${el}-val`).text(showVal);
+		if ($(`${el}-val-f`)) {
+			let valueFar = showVal * 1.8 + 32;
+			$(`${el}-val-f`).text(valueFar.toFixed(1));
+		}
+
+		inp.addEventListener("input", function (e) {
+			inpVal = e.target.value;
+
+			let val =
+				(inpVal - e.target.getAttribute("min")) /
+				(e.target.getAttribute("max") - e.target.getAttribute("min"));
+
+			inp.style.cssText = `background-image: -webkit-gradient(linear, left top, right top, color-stop( ${val} , ${color}), color-stop(${val}, ${colorStop}))`;
+
+			showVal = $(el).val();
+			$(el).attr("data-val", showVal);
+			$(`${el}-val`).text(showVal);
+			if ($(`${el}-val-f`)) {
+				let valueFar = showVal * 1.8 + 32;
+				$(`${el}-val-f`).text(valueFar.toFixed(1));
+			}
+		});
+	}
+
+	function loadRangeBars() {
+		rangeBar(".temp", "#EE777F", "#FFE6E6");
+		rangeBar(".water", "#65BDC0", "rgba(202, 238, 239, 0.51)");
+		rangeBar(".light", "#1D2343", "rgba(197, 202, 227, 0.71)");
+	}
+
+	window.addEventListener("load", function () {
+		loadRangeBars();
+	});
+</script>

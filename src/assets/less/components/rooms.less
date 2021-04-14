@@ -1,0 +1,136 @@
+.room {
+    &__info {
+        display: flex;
+        flex-direction: row;
+
+        .cards {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.14);
+            border-radius: 30px;
+            margin: 30px 30px 30px 0;
+            padding: 15px 90px 15px 20px;
+            min-height: 200px;
+
+            &-info {
+                display: flex;
+                align-items: flex-end;
+                flex-direction: column;
+                margin-right: 20px;
+
+                h5 {
+                    color: @graytext;
+                    font-size: 15px;
+                    font-family: @FFRRegular;
+                    margin-bottom: 16px;
+                }
+
+                .val-sens {
+                    font-size: 36px;
+                    color: @graybox;
+                    font-family: @FFRRegular;
+
+
+                }
+
+                .temp-val,
+                .temp-val-f {
+                    &::after {
+                        font-size: 22px;
+                    }
+                }
+            }
+
+            .water-val::after {
+                content: '%';
+            }
+
+            .temp-val::after {
+                content: ' \2103';
+            }
+
+            .temp-val-f::after {
+                content: ' \2109';
+            }
+
+            .light-val::after {
+                content: '%';
+            }
+
+
+            &-bar {
+                position: absolute;
+                width: 176px;
+                height: 75px;
+                right: -35px;
+                bottom: 64px;
+                margin: 0;
+                outline: none;
+                transform: rotate(-90deg);
+                -webkit-appearance: none;
+                -moz-apperance: none;
+                border-radius: 25px;
+
+                background-image: -webkit-gradient(linear,
+                        left top,
+                        right top,
+                        color-stop(0.15, @coralicon),
+                        color-stop(0.15, #FFE6E6));
+                box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.14);
+
+
+                &.water {
+                    background-image: -webkit-gradient(linear,
+                            left top,
+                            right top,
+                            color-stop(0.15, @greenicon),
+                            color-stop(0.15, rgba(202, 238, 239, 0.51); ));
+
+                    &::before {
+                        background-image: url(/assets/img/rooms/kitchen/water.svg);
+
+                    }
+
+                }
+
+                &.light {
+                    background-image: -webkit-gradient(linear,
+                            left top,
+                            right top,
+                            color-stop(0.15, @blueicon),
+                            color-stop(0.15, rgba(197, 202, 227, 0.71); ));
+
+                    &::before {
+                        background-image: url(/assets/img/rooms/kitchen/light.svg);
+
+                    }
+
+
+                }
+
+
+                &::before {
+                    content: '';
+                    background-image: url(/assets/img/main/tempsensor.svg);
+                    width: 22px;
+                    height: 40px;
+                    position: absolute;
+                    transform: rotate(90deg);
+                    bottom: calc(50% - 40px / 2);
+                    right: 140px;
+                    mix-blend-mode: color-dodge;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+
+                &::-webkit-slider-thumb {
+                    -webkit-appearance: none !important;
+                    background-color: red;
+                    width: 5px;
+                }
+            }
+        }
+
+    }
+}
