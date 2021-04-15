@@ -122,13 +122,17 @@
 	function rangeBar(el, color, colorStop) {
 		let inp = document.querySelector(el);
 		let showVal = $(el).val();
-
+		let defaultProgress =
+			(showVal - inp.getAttribute("min")) /
+			(inp.getAttribute("max") - inp.getAttribute("min"));
 		$(el).attr("data-val", showVal);
 		$(`${el}-val`).text(showVal);
 		if ($(`${el}-val-f`)) {
 			let valueFar = showVal * 1.8 + 32;
 			$(`${el}-val-f`).text(valueFar.toFixed(1));
 		}
+		console.log(defaultProgress);
+		inp.style.cssText = `background-image: -webkit-gradient(linear, left top, right top, color-stop( ${defaultProgress} , ${color}), color-stop(${defaultProgress}, ${colorStop}))`;
 
 		inp.addEventListener("input", function (e) {
 			inpVal = e.target.value;
