@@ -134,3 +134,53 @@
 
     }
 }
+
+.device {
+    max-width: 800px;
+    width: 100%;
+
+    &--text {
+        font-size: 24px;
+        color: @graybox;
+        margin-bottom: 27px;
+
+    }
+
+    .wrap-device {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__control {
+        margin: 0 36px 23px 0;
+
+        .btn-device {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: @white;
+            border-radius: 20px;
+            width: 163px;
+            height: 131px;
+            padding: 5px 5px;
+
+
+            img {
+                margin: 0 auto 10px;
+            }
+        }
+
+        .red {
+            background: @coralicon;
+        }
+
+        .green {
+            background: @greenicon;
+        }
+
+        .blue {
+            background: @blueicon;
+        }
+    }
+}
