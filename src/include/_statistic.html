@@ -1,0 +1,183 @@
+<main>
+	@@include('_topbar.html')
+	<div class="container">
+		<h2>Statistics</h2>
+		<div class="graphics">
+			<div class="graph">
+				<h5>Electricity</h5>
+				<div class="graph--card">
+					<canvas id="myChart"></canvas>
+				</div>
+			</div>
+			<div class="graph">
+				<h5>Water</h5>
+				<div class="graph--card">
+					<canvas id="myChartWater"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="graphics">
+			<div class="graph">
+				<h5>Waste Management</h5>
+				<div class="graph--card type2">
+					<canvas id="myChartWaste"></canvas>
+				</div>
+			</div>
+			<div class="graph">
+				<h5>Sorting</h5>
+				<div class="graph--card type2 type3">
+					<canvas id="pon4ik"></canvas>
+				</div>
+			</div>
+			<div class="graph">
+				<h5>Devices</h5>
+				<div class="graph--card type2 type4">
+					<div class="card-device">
+						<div class="bg blue">
+							<svg>
+								<use xlink:href="#tv" />
+							</svg>
+						</div>
+						<h6>TV</h6>
+					</div>
+					<div class="card-device">
+						<div class="bg coral">
+							<svg>
+								<use xlink:href="#kettle" />
+							</svg>
+						</div>
+						<h6>Kettle</h6>
+					</div>
+					<div class="card-device">
+						<div class="bg green">
+							<svg>
+								<use xlink:href="#washer" />
+							</svg>
+						</div>
+						<h6>Washer</h6>
+					</div>
+					<div class="card-device">
+						<div class="bg coral">
+							<svg>
+								<use xlink:href="#fridge" />
+							</svg>
+						</div>
+						<h6>Fridge</h6>
+					</div>
+					<div class="card-device">
+						<div class="bg green">
+							<svg>
+								<use xlink:href="#stove" />
+							</svg>
+						</div>
+						<h6>Stove</h6>
+					</div>
+					<div class="card-device">
+						<div class="bg blue">
+							<svg>
+								<use xlink:href="#PC" />
+							</svg>
+						</div>
+						<h6>PC</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+	let dataGraphElectricity = [53, 55, 43, 41, 41, 75];
+	let dataGraphWater = [38, 57, 38, 37, 50, 61];
+	let dataGraphWaste = [63, 38, 72, 65, 65, 61];
+	const labels = ["Dec", "Mar", "May", "Jul", "Sep", "Nov"];
+
+	var myChartElectricity = new Chart(document.getElementById("myChart"), {
+		type: "line",
+		data: {
+			labels: labels,
+			datasets: [
+				{
+					tension: 0.3,
+					backgroundColor: "#FF778F",
+					borderColor: "#EE777F",
+					data: dataGraphElectricity,
+				},
+			],
+		},
+		options: {
+			plugins: {
+				legend: {
+					display: false,
+				},
+			},
+		},
+	});
+
+	var myChartWater = new Chart(document.getElementById("myChartWater"), {
+		type: "line",
+		data: {
+			labels: labels,
+			datasets: [
+				{
+					tension: 0.3,
+					backgroundColor: "#65BDC0",
+					borderColor: "#65BDC0",
+					data: dataGraphWater,
+				},
+			],
+		},
+		options: {
+			plugins: {
+				legend: {
+					display: false,
+				},
+			},
+		},
+	});
+
+	var myChartWaste = new Chart(document.getElementById("myChartWaste"), {
+		type: "line",
+		data: {
+			labels: labels,
+			datasets: [
+				{
+					tension: 0.3,
+					backgroundColor: "#000",
+					borderColor: "#000",
+					data: dataGraphWaste,
+				},
+			],
+		},
+		options: {
+			plugins: {
+				legend: {
+					display: false,
+				},
+			},
+		},
+	});
+
+	var pon4ik = new Chart(document.getElementById("pon4ik"), {
+		type: "doughnut",
+		data: {
+			labels: ["Paper", "Glass", "Plastic"],
+			datasets: [
+				{
+					data: [40, 20, 115],
+					backgroundColor: ["#65BDC0", "#1D2343", "#EE777F"],
+				},
+			],
+		},
+		options: {
+			plugins: {
+				legend: {
+					htmlLegend: { containerID: "legend-container" },
+					position: "bottom",
+
+					display: true,
+				},
+			},
+		},
+	});
+</script>
