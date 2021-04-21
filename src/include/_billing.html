@@ -1,0 +1,180 @@
+<main>
+	@@include('_topbar.html')
+	<div class="container">
+		<h2>Utility Billing</h2>
+		<div class="invoice">
+			<div class="invoice--history">
+				<h3>Invoice History</h3>
+				<div class="card-inv">
+					<table>
+						<tr>
+							<th>Number</th>
+							<th>Category</th>
+							<th>Month</th>
+							<th>Due Date</th>
+							<th>Amount Due</th>
+							<th>Status</th>
+						</tr>
+						<tr class="hover">
+							<td>000245</td>
+							<td>Water</td>
+							<td>March</td>
+							<td>04/15/2020</td>
+							<td>$56.78</td>
+							<td class="status unpaid">Unpaid</td>
+						</tr>
+						<tr class="hover">
+							<td>000244</td>
+							<td>Waste</td>
+							<td>March</td>
+							<td>04/12/2020</td>
+							<td>$14.92</td>
+							<td class="status unpaid">Unpaid</td>
+						</tr>
+						<tr class="hover">
+							<td>000243</td>
+							<td>Electricity</td>
+							<td>March</td>
+							<td>04/06/2020</td>
+							<td>$86.98</td>
+							<td class="status paid">Paid</td>
+						</tr>
+						<tr class="hover">
+							<td>000242</td>
+							<td>Water</td>
+							<td>February</td>
+							<td>03/15/2020</td>
+							<td>$53.78</td>
+							<td class="status paid">Paid</td>
+						</tr>
+						<tr class="hover">
+							<td>000241</td>
+							<td>Waste</td>
+							<td>February</td>
+							<td>03/12/2020</td>
+							<td>$13.98</td>
+							<td class="status paid">Paid</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="invoice--current">
+				<h3>Current Invoice</h3>
+				<div class="curr">
+					<div class="card-curr">
+						<div class="curr-line">
+							<div class="typetext">Number</div>
+							<div>123123</div>
+						</div>
+						<div class="curr-line">
+							<div class="typetext">Due Date</div>
+							<div>12123</div>
+						</div>
+						<div class="curr-line">
+							<div class="typetext">Amount Due</div>
+							<div>12335</div>
+						</div>
+					</div>
+					<hr />
+					<div class="card-bottom">
+						<div class="bottom-line">
+							<div class="typetext">Tax</div>
+							<div>87978</div>
+						</div>
+						<div class="bottom-line">
+							<div class="typetext">Total</div>
+							<div>98671</div>
+						</div>
+					</div>
+					<button class="pay">Pay</button>
+				</div>
+			</div>
+		</div>
+		<div class="chart">
+			<div>
+				<canvas id="graf"></canvas>
+			</div>
+		</div>
+	</div>
+</main>
+<script>
+	var graf = new Chart(document.getElementById("graf"),{
+		type: "line",
+		data: labels: labels,
+		datasets: [
+			{
+				label: "Dataset 1",
+				data: Utils.numbers(NUMBER_CFG),
+				fill: true,
+				borderColor: Utils.CHART_COLORS.red,
+				backgroundColor: Utils.transparentize(
+					Utils.CHART_COLORS.red,
+					0.5
+				),
+				],
+		options: {
+			responsive: true,
+			interaction: {
+				mode: "index",
+				intersect: false,
+			},
+			stacked: false,
+			plugins: {
+				title: {
+					display: true,
+					text: "Chart.js Line Chart - Multi Axis",
+				},
+			},
+			scales: {
+				y: {
+					type: "linear",
+					display: true,
+					position: "left",
+				},
+				y1: {
+					type: "linear",
+					display: true,
+					position: "right",
+
+					// grid line settings
+					grid: {
+						drawOnChartArea: false, // only want the grid lines for one axis to show up
+					},
+				},
+			},
+		},
+	}),
+
+
+	const DATA_COUNT = 7;
+	const NUMBER_CFG = { count: DATA_COUNT, min: -100, max: 100 };
+
+	const labels = Utils.months({ count: 7 });
+	const data = {
+		labels: labels,
+		datasets: [
+			{
+				label: "Dataset 1",
+				data: Utils.numbers(NUMBER_CFG),
+				fill: true,
+				borderColor: Utils.CHART_COLORS.red,
+				backgroundColor: Utils.transparentize(
+					Utils.CHART_COLORS.red,
+					0.5
+				),
+				yAxisID: "y",
+			},
+			{
+				label: "Dataset 2",
+				data: Utils.numbers(NUMBER_CFG),
+				borderColor: Utils.CHART_COLORS.blue,
+				backgroundColor: Utils.transparentize(
+					Utils.CHART_COLORS.blue,
+					0.5
+				),
+				yAxisID: "y1",
+				fill: true,
+			},
+		],
+	};
+</script>

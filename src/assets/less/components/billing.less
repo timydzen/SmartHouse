@@ -1,0 +1,109 @@
+.invoice {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &--history {
+
+        .card-inv {
+            background: #FFF5F5;
+            box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.14);
+            border-radius: 30px;
+
+            table {
+                width: 687px;
+                padding: 5px 20px;
+
+                .hover {
+                    padding: 20px;
+                    cursor: pointer;
+
+                    &:hover,
+                    &:focus {
+                        background: #ffffff;
+
+                    }
+                }
+
+                th {
+                    padding: 10px;
+                    color: rgba(29, 35, 67, 0.47);
+
+                }
+
+                td {
+                    display: table-cell;
+                    vertical-align: inherit;
+                    text-align: center;
+                    padding: 5px 20px;
+                    color: @graybox;
+                }
+
+                .status {
+                    width: 71px;
+                    height: 24px;
+                    border-radius: 16px;
+
+                    &.paid {
+                        background: @greenicon;
+                    }
+
+                    &.unpaid {
+                        background: @coralicon;
+                    }
+                }
+            }
+
+
+        }
+    }
+
+    .curr {
+        width: 285px;
+        background: #FFF5F5;
+        box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.14);
+        border-radius: 30px;
+        padding: 10px;
+
+        .pay {
+            width: 104px;
+            height: 35px;
+            background: #EE777F;
+            border-radius: 21px;
+            font-size: 18px;
+            color: @white;
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .typetext {
+            font-size: 16px;
+            color: @graytext;
+            margin-bottom: 11px;
+        }
+
+        .card-curr {
+
+            .curr-line {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .card-bottom {
+
+            .bottom-line {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+
+                .typetext {
+                    margin-right: 30px;
+                }
+            }
+        }
+    }
+}
