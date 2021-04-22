@@ -1,7 +1,13 @@
+.ogl-bill {
+    font-size: 24px;
+    color: @graytext;
+}
+
 .invoice {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 51px;
 
     &--history {
 
@@ -14,7 +20,7 @@
                 width: 687px;
                 padding: 5px 20px;
 
-                .hover {
+                tbody tr {
                     padding: 20px;
                     cursor: pointer;
 
@@ -43,6 +49,7 @@
                     width: 71px;
                     height: 24px;
                     border-radius: 16px;
+                    text-transform: capitalize;
 
                     &.paid {
                         background: @greenicon;
@@ -50,6 +57,7 @@
 
                     &.unpaid {
                         background: @coralicon;
+
                     }
                 }
             }
@@ -106,4 +114,60 @@
             }
         }
     }
+}
+
+.chart {
+
+    .line-chartogl {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+        max-width: 1011px;
+        width: 100%;
+
+        .legend {
+
+            &-card {
+                display: inline-flex;
+                flex-direction: row;
+                align-items: center;
+                margin-right: 15px;
+
+
+                span {
+                    width: 22px;
+                    height: 22px;
+                    border-radius: 50%;
+                    display: inline-block;
+                    margin-right: 13px;
+
+                    &.coral {
+                        background: @coralicon;
+                    }
+
+                    &.blue {
+                        background: @blueicon
+                    }
+
+                    &.green {
+                        background: @greenicon;
+                    }
+                }
+            }
+        }
+
+    }
+
+
+}
+
+#grafic {
+    width: 1011px;
+    height: 258px;
+}
+
+#graf {
+    height: 350px !important;
+    width: 1011px;
 }

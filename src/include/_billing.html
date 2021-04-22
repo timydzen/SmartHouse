@@ -4,57 +4,20 @@
 		<h2>Utility Billing</h2>
 		<div class="invoice">
 			<div class="invoice--history">
-				<h3>Invoice History</h3>
+				<h3 class="ogl-bill">Invoice History</h3>
 				<div class="card-inv">
 					<table>
-						<tr>
-							<th>Number</th>
-							<th>Category</th>
-							<th>Month</th>
-							<th>Due Date</th>
-							<th>Amount Due</th>
-							<th>Status</th>
-						</tr>
-						<tr class="hover">
-							<td>000245</td>
-							<td>Water</td>
-							<td>March</td>
-							<td>04/15/2020</td>
-							<td>$56.78</td>
-							<td class="status unpaid">Unpaid</td>
-						</tr>
-						<tr class="hover">
-							<td>000244</td>
-							<td>Waste</td>
-							<td>March</td>
-							<td>04/12/2020</td>
-							<td>$14.92</td>
-							<td class="status unpaid">Unpaid</td>
-						</tr>
-						<tr class="hover">
-							<td>000243</td>
-							<td>Electricity</td>
-							<td>March</td>
-							<td>04/06/2020</td>
-							<td>$86.98</td>
-							<td class="status paid">Paid</td>
-						</tr>
-						<tr class="hover">
-							<td>000242</td>
-							<td>Water</td>
-							<td>February</td>
-							<td>03/15/2020</td>
-							<td>$53.78</td>
-							<td class="status paid">Paid</td>
-						</tr>
-						<tr class="hover">
-							<td>000241</td>
-							<td>Waste</td>
-							<td>February</td>
-							<td>03/12/2020</td>
-							<td>$13.98</td>
-							<td class="status paid">Paid</td>
-						</tr>
+						<thead>
+							<tr>
+								<th>Number</th>
+								<th>Category</th>
+								<th>Month</th>
+								<th>Due Date</th>
+								<th>Amount Due</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody id="tablepay"></tbody>
 					</table>
 				</div>
 			</div>
@@ -91,90 +54,150 @@
 			</div>
 		</div>
 		<div class="chart">
-			<div>
+			<div class="line-chartogl">
+				<h3 class="ogl-bill">Invoicing Chart</h3>
+				<div class="legend">
+					<div class="legend-card">
+						<span class="coral"></span>
+						<p>Waste</p>
+					</div>
+					<div class="legend-card">
+						<span class="blue"></span>
+						<p>Water</p>
+					</div>
+					<div class="legend-card">
+						<span class="green"></span>
+						<p>Electricity</p>
+					</div>
+				</div>
+			</div>
+			<div id="grafic">
 				<canvas id="graf"></canvas>
 			</div>
 		</div>
 	</div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-	var graf = new Chart(document.getElementById("graf"),{
+	let datacoral = [40, 41, 25, 28, 32, 43, 18, 19, 26, 36, 33, 38];
+	let datablue = [80, 48, 45, 41, 46, 52, 35, 39, 40, 44, 42, 80];
+	let datagreen = [45, 55, 48, 42, 48, 40, 48, 55, 51, 48, 49, 44];
+	const labels = [
+		"Dec",
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+	];
+
+	var graf = new Chart(document.getElementById("graf"), {
 		type: "line",
-		data: labels: labels,
-		datasets: [
-			{
-				label: "Dataset 1",
-				data: Utils.numbers(NUMBER_CFG),
-				fill: true,
-				borderColor: Utils.CHART_COLORS.red,
-				backgroundColor: Utils.transparentize(
-					Utils.CHART_COLORS.red,
-					0.5
-				),
-				],
+		data: {
+			labels: labels,
+			datasets: [
+				{
+					tension: 0.3,
+					backgroundColor: "#FF778F",
+					borderColor: "#EE777F",
+					data: datacoral,
+					fill: true,
+
+					pointRadius: 0,
+				},
+				{
+					tension: 0.3,
+					backgroundColor: "#1D2343",
+					borderColor: "#1D2343",
+					data: datablue,
+					fill: true,
+					pointRadius: 0,
+				},
+				{
+					tension: 0.3,
+					backgroundColor: "#65BDC0",
+					borderColor: "#65BDC0",
+					data: datagreen,
+					fill: true,
+					pointRadius: 0,
+				},
+			],
+		},
 		options: {
 			responsive: true,
+			plugins: {
+				legend: {
+					display: false,
+				},
+			},
 			interaction: {
+				display: false,
 				mode: "index",
 				intersect: false,
 			},
-			stacked: false,
-			plugins: {
-				title: {
-					display: true,
-					text: "Chart.js Line Chart - Multi Axis",
-				},
-			},
 			scales: {
-				y: {
-					type: "linear",
+				x: {
 					display: true,
-					position: "left",
+					title: {
+						display: true,
+					},
 				},
-				y1: {
-					type: "linear",
+				y: {
 					display: true,
-					position: "right",
-
-					// grid line settings
-					grid: {
-						drawOnChartArea: false, // only want the grid lines for one axis to show up
+					title: {
+						display: true,
 					},
 				},
 			},
 		},
-	}),
+	});
 
+	var payed = [
+		{
+			number: "000245",
+			category: "Water",
+			month: "March",
+			date: "04/15/2020",
+			amount: "$56.78",
+			status: "unpaid",
+		},
+		{
+			number: "000244",
+			category: "Waste",
+			month: "March",
+			date: "04/12/2020",
+			amount: "$14.92",
+			status: "unpaid",
+		},
+		{
+			number: "000244",
+			category: "Waste",
+			month: "March",
+			date: "04/12/2020",
+			amount: "$14.92",
+			status: "paid",
+		},
+	];
 
-	const DATA_COUNT = 7;
-	const NUMBER_CFG = { count: DATA_COUNT, min: -100, max: 100 };
-
-	const labels = Utils.months({ count: 7 });
-	const data = {
-		labels: labels,
-		datasets: [
-			{
-				label: "Dataset 1",
-				data: Utils.numbers(NUMBER_CFG),
-				fill: true,
-				borderColor: Utils.CHART_COLORS.red,
-				backgroundColor: Utils.transparentize(
-					Utils.CHART_COLORS.red,
-					0.5
-				),
-				yAxisID: "y",
-			},
-			{
-				label: "Dataset 2",
-				data: Utils.numbers(NUMBER_CFG),
-				borderColor: Utils.CHART_COLORS.blue,
-				backgroundColor: Utils.transparentize(
-					Utils.CHART_COLORS.blue,
-					0.5
-				),
-				yAxisID: "y1",
-				fill: true,
-			},
-		],
-	};
+	for (let i = 0; i < payed.length; i++) {
+		const element = payed[i];
+		var tableline = document.createElement("tr");
+		tableline.innerHTML = `
+			
+				<td>${element.number}</td>
+				<td>${element.category}</td>
+				<td>${element.month}</td>
+				<td>${element.date}</td>
+				<td>${element.amount}</td>
+				<td class="status ${element.status}">${element.status}</td>
+			
+		`;
+		document.getElementById("tablepay").appendChild(tableline);
+	}
 </script>
